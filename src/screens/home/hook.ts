@@ -5,6 +5,7 @@ import {updateSection, updateStories} from '../../data/store/stories/actions';
 import {IStore, IStory} from '../../models';
 
 export interface IUseTopStories {
+  loading: boolean;
   section: string;
   setSection: (value: string) => void;
   data: IStory[];
@@ -12,6 +13,7 @@ export interface IUseTopStories {
 
 export const useTopStories = (): IUseTopStories => {
   const [data, setData] = useState<IStory[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useDispatch();
   const section = useSelector((store: IStore) => store.storiesReducer.section);
   const stories = useSelector((store: IStore) => store.storiesReducer.stories);
@@ -19,10 +21,12 @@ export const useTopStories = (): IUseTopStories => {
   useEffect(() => {
     let isMounted = true;
     const fetchStories = async () => {
+      setLoading(true);
       const {results} = await getTopStoriesService(section);
       if (isMounted) {
         dispatch(updateStories(section, results));
         setData(results);
+        setLoading(false);
       }
     };
     fetchStories();
@@ -56,6 +60,7 @@ export const useTopStories = (): IUseTopStories => {
   };
 
   return {
+    loading,
     section,
     setSection,
     data,

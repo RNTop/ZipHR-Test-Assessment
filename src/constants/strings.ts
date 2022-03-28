@@ -1,1 +1,4 @@
-export const STRINGS = {};
+export const STRINGS = {
+  title: 'Top Stories',
+  section: 'Section',
+};

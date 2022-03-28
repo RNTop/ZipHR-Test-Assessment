@@ -6,6 +6,7 @@ import {ICustomStyleProp} from '../models/style';
 export const Wrapper = styled.View<ICustomStyleProp>``;
 
 export const View = styled.View<ICustomStyleProp>``;
+export const TouchableOpacity = styled.TouchableOpacity<ICustomStyleProp>``;
 
 export const Container = styled(Wrapper)<ICustomStyleProp>`
   background-color: ${props => props.theme.body};
@@ -30,6 +31,10 @@ export const FlexWrapper = styled.View<ICustomStyleProp>`
   flex-direction: row;
 `;
 
+export const GrowView = styled.View<ICustomStyleProp>`
+  flex: 1;
+`;
+
 export const RowView = styled.View<ICustomStyleProp>`
   width: 100%;
   flex-direction: row;
@@ -49,10 +54,12 @@ export const Loader = styled.ActivityIndicator`
 `;
 
 export const AppText = styled.Text<ICustomStyleProp>`
+  color: ${props => props.color || COLORS.white};
   letter-spacing: 0.135px;
   font-size: ${props => (props.fontSize || 14) * DIMENSIONS.multiplier}px;
   font-weight: ${({fontWeight}) => fontWeight || 'normal'};
   opacity: ${({opacity}) => opacity || 1};
+  text-transform: capitalize;
 `;
 
 export const BoldText = styled(AppText)<ICustomStyleProp>`
@@ -60,7 +67,7 @@ export const BoldText = styled(AppText)<ICustomStyleProp>`
 `;
 
 export const Title = styled.Text<ICustomStyleProp>`
-  color: ${props => props.color || 'white'};
+  color: ${props => props.color || COLORS.white};
   letter-spacing: 0.135px;
   font-size: ${28 * DIMENSIONS.multiplier}px;
 `;
@@ -91,6 +98,12 @@ export const H3 = styled.Text<ICustomStyleProp>`
 export const H4 = styled.Text<ICustomStyleProp>`
   color: ${props => props.color || COLORS.text};
   font-size: ${18 * DIMENSIONS.multiplier}px;
+`;
+
+export const SmallText = styled.Text<ICustomStyleProp>`
+  color: ${props => props.color || COLORS.text};
+  font-size: ${10 * DIMENSIONS.multiplier}px;
+  margin-top: ${props => props.marginTop || 1}px;
 `;
 
 export const H5 = styled.Text<ICustomStyleProp>`

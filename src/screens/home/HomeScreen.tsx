@@ -1,8 +1,11 @@
 import React from 'react';
-import {FlatList, Text} from 'react-native';
+import {FlatList} from 'react-native';
 import {MainContainer} from '../../components';
-import {IUseTopStories} from './hook';
+import {Loader, Title} from '../../components/styled-components';
+import {STRINGS} from '../../constants';
 import {StoryItem} from './components';
+import {SectionHeader} from './components/SectionHeader';
+import {IUseTopStories} from './hook';
 
 export interface IHomeScreen {
   storiesInfo: IUseTopStories;
@@ -11,12 +14,20 @@ export interface IHomeScreen {
 const HomeScreen = ({storiesInfo}: IHomeScreen) => {
   return (
     <MainContainer>
-      <Text>{storiesInfo.section}</Text>
+      <Title>{STRINGS.title}</Title>
+      <SectionHeader
+        section={storiesInfo.section}
+        setSection={storiesInfo.setSection}
+      />
       <FlatList
         listKey="top-stories"
         data={storiesInfo.data}
         renderItem={({item}) => <StoryItem story={item} />}
         keyExtractor={item => item.title}
+        showsVerticalScrollIndicator={false}
+        initialNumToRender={5}
+        ListEmptyComponent={<Loader />}
+        removeClippedSubviews
       />
     </MainContainer>
   );
