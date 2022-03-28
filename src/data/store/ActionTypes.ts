@@ -1,0 +1,4 @@
+export const ActionTypes = {
+  UPDATE_SECTION: 'UPDATE_SECTION',
+  UPDATE_STORIES: 'UPDATE_STORIES',
+};
