@@ -13,19 +13,21 @@ export interface IHomeScreen {
 
 const HomeScreen = ({storiesInfo}: IHomeScreen) => {
   return (
-    <MainContainer>
+    <MainContainer id="home-screen">
       <Title>{STRINGS.title}</Title>
       <SectionHeader
+        id="section-list"
         section={storiesInfo.section}
         setSection={storiesInfo.setSection}
       />
       <SearchInput
+        id="home-search-input"
         placeholder={STRINGS.keyword}
         onChangeText={storiesInfo.setSearch}
         value={storiesInfo.search}
       />
       <FlatList
-        listKey="top-stories"
+        testID="top-stories"
         data={storiesInfo.data}
         renderItem={({item}) => <StoryItem story={item} />}
         keyExtractor={item => item.title}

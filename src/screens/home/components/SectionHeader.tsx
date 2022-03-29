@@ -1,10 +1,10 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
+import {StyleSheet, View, FlatList} from 'react-native';
 import {SECTIONS} from '../../../constants/sections';
 import {OutlineButton} from './OutlineButton';
 
 interface ISectionHeader {
+  id?: string;
   section: string;
   setSection: (s: string) => void;
 }

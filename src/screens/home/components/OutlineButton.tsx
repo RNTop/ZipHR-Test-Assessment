@@ -11,6 +11,7 @@ interface IOutlineButton {
 export const OutlineButton = ({disabled, label, onPress}: IOutlineButton) => {
   return (
     <TouchableOpacity
+      testID="outline-button"
       disabled={disabled}
       style={[
         styles.container,

@@ -4,6 +4,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {COLORS} from '../../constants';
 
 interface IMainContainer {
+  id: string;
   children: React.ReactNode;
 }
 

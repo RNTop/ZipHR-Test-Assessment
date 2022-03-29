@@ -1,3 +1,4 @@
+import {timeAgoFrom} from '@utils/time';
 import React from 'react';
 import {Linking, StyleSheet, View} from 'react-native';
 import AppFastImage from '../../../components/AppFastImage';
@@ -35,7 +36,9 @@ export const StoryItem = ({story}: IStoryItem) => {
         <H4 numberOfLines={2}>{story.title}</H4>
         <View>
           <SmallText>{story.byline}</SmallText>
-          <SmallText marginTop={5}>{story.published_date}</SmallText>
+          <SmallText marginTop={5}>
+            {timeAgoFrom(story.published_date)}
+          </SmallText>
         </View>
       </TouchableOpacity>
     </FlexBetweenWrapper>

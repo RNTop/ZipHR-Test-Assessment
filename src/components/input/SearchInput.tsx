@@ -5,6 +5,7 @@ import {View} from '../styled-components';
 import {COLORS, DIMENSIONS} from '../../constants';
 
 interface ISearchInput {
+  id?: string;
   value: string | undefined;
   onChangeText: (val: string) => void;
   placeholder: string;
