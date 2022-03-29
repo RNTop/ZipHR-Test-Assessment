@@ -9,11 +9,15 @@ export interface IUseTopStories {
   section: string;
   setSection: (value: string) => void;
   data: IStory[];
+  search: string;
+  setSearch: (value: string) => void;
 }
 
 export const useTopStories = (): IUseTopStories => {
   const [data, setData] = useState<IStory[]>([]);
+  const [filteredData, setFilteredData] = useState<IStory[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>('');
   const dispatch = useDispatch();
   const section = useSelector((store: IStore) => store.storiesReducer.section);
   const stories = useSelector((store: IStore) => store.storiesReducer.stories);
@@ -26,6 +30,7 @@ export const useTopStories = (): IUseTopStories => {
       if (isMounted) {
         dispatch(updateStories(section, results));
         setData(results);
+        setFilteredData(results);
         setLoading(false);
       }
     };
@@ -41,6 +46,7 @@ export const useTopStories = (): IUseTopStories => {
     const fetchCacheStories = async () => {
       if (isMounted && isFirst && stories && stories[section]) {
         setData(stories[section]);
+        setFilteredData(stories[section]);
         isFirst = false;
       }
     };
@@ -52,6 +58,7 @@ export const useTopStories = (): IUseTopStories => {
 
   const setSection = (value: string) => {
     dispatch(updateSection(value));
+    setSearch('');
     if (stories && stories[value]) {
       setData(stories[value]);
     } else {
@@ -59,10 +66,27 @@ export const useTopStories = (): IUseTopStories => {
     }
   };
 
+  const handleSearch = (value: string) => {
+    setSearch(value);
+    if (value) {
+      setFilteredData(
+        data.filter(({title}) => {
+          const searchData = (title && title.toUpperCase()) || '';
+          const textData = value.toUpperCase();
+          return searchData.indexOf(textData) > -1;
+        }),
+      );
+    } else {
+      setFilteredData(data);
+    }
+  };
+
   return {
     loading,
     section,
     setSection,
-    data,
+    data: filteredData,
+    search,
+    setSearch: handleSearch,
   };
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import {FlatList} from 'react-native';
-import {MainContainer} from '../../components';
+import {MainContainer, SearchInput} from '../../components';
 import {Loader, Title} from '../../components/styled-components';
 import {STRINGS} from '../../constants';
 import {StoryItem} from './components';
@@ -18,6 +18,11 @@ const HomeScreen = ({storiesInfo}: IHomeScreen) => {
       <SectionHeader
         section={storiesInfo.section}
         setSection={storiesInfo.setSection}
+      />
+      <SearchInput
+        placeholder={STRINGS.keyword}
+        onChangeText={storiesInfo.setSearch}
+        value={storiesInfo.search}
       />
       <FlatList
         listKey="top-stories"
